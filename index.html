@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaybeTask — договорённости вместо списка дел</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <div class="logo">MaybeTask</div>
+      <div class="nav-links">
+        <a href="#mechanics">Механика</a>
+        <a href="#contracts">Контракты</a>
+        <a href="#rewards">Награды</a>
+      </div>
+      <button class="cta">Запустить команду</button>
+    </nav>
+    <div class="hero-content">
+      <div>
+        <p class="eyebrow">Планировщик для небольших команд</p>
+        <h1>Задачи, которые превращаются в договорённости с наградой.</h1>
+        <p class="lead">
+          Не список дел, а система ответственности: фиксируйте контракты, выполняйте их в срок и
+          зарабатывайте внутреннюю валюту и бонусы.
+        </p>
+        <div class="hero-actions">
+          <button class="primary">Создать первый контракт</button>
+          <button class="ghost">Посмотреть демо</button>
+        </div>
+        <div class="metrics">
+          <div>
+            <span class="metric-value" id="metricContracts">12</span>
+            <span class="metric-label">контрактов в работе</span>
+          </div>
+          <div>
+            <span class="metric-value" id="metricCompletion">86%</span>
+            <span class="metric-label">выполнено вовремя</span>
+          </div>
+          <div>
+            <span class="metric-value" id="metricBalance">420</span>
+            <span class="metric-label">баллов в экономике</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="card-header">
+          <span>Баланс команды</span>
+          <strong id="teamBalance">2 350</strong>
+        </div>
+        <div class="card-body">
+          <div class="badge">Ритуал недели</div>
+          <h3>Договорённость: релиз лендинга</h3>
+          <p>Срок: 18 марта · Исполнитель: Алина · Награда: 250 валюты + 30 XP</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: 70%"></div>
+          </div>
+          <button class="primary full">Принять контракт</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="mechanics">
+    <h2>Как работает система ответственности</h2>
+    <div class="grid three">
+      <article class="panel">
+        <h3>1. Договоритесь о результате</h3>
+        <p>Фиксируйте задачи как контракты: ожидание, критерии, срок и цена договорённости.</p>
+      </article>
+      <article class="panel">
+        <h3>2. Подкрепите мотивацией</h3>
+        <p>Выдавайте внутреннюю валюту, бонусы или XP за выполнение вовремя.</p>
+      </article>
+      <article class="panel">
+        <h3>3. Следите за прогрессом</h3>
+        <p>Прозрачные статусы и отчёты помогают держать фокус без лишних конфликтов.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section highlight" id="contracts">
+    <div class="section-head">
+      <h2>Создайте контракт прямо сейчас</h2>
+      <p>Попробуйте механику: сформируйте договорённость, назначьте награду и проверьте баланс.</p>
+    </div>
+    <div class="contract-builder">
+      <form id="contractForm" class="contract-form">
+        <label>
+          Название контрактной задачи
+          <input type="text" name="title" placeholder="Например, подготовить презентацию" required />
+        </label>
+        <label>
+          Исполнитель
+          <input type="text" name="owner" placeholder="Имя коллеги" required />
+        </label>
+        <label>
+          Срок выполнения
+          <input type="date" name="due" required />
+        </label>
+        <label>
+          Награда (валюта)
+          <input type="number" name="reward" min="10" value="150" required />
+        </label>
+        <label>
+          Бонус XP
+          <input type="number" name="xp" min="5" value="20" required />
+        </label>
+        <button type="submit" class="primary">Добавить контракт</button>
+      </form>
+      <div class="contract-board">
+        <div class="board-header">
+          <h3>Активные договорённости</h3>
+          <p>Баланс команды: <strong id="balance">1 200</strong> валюты</p>
+        </div>
+        <ul id="contractList" class="contract-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rewards">
+    <h2>Награды и экономика, которые формируют привычку</h2>
+    <div class="grid two">
+      <article class="panel">
+        <h3>Гибкая система валюты</h3>
+        <p>
+          Внутренняя валюта используется для бонусов, обмена или поддержки командных инициатив.
+          Настройте правила: кто начисляет, кто подтверждает, как тратить.
+        </p>
+        <ul>
+          <li>Конвертация в реальные бонусы</li>
+          <li>Публичные благодарности</li>
+          <li>Фонды на обучение</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3>Прозрачность без давления</h3>
+        <p>
+          Контракты видны всей команде: статус, сроки, награды. Это повышает доверие и снижает
+          риск конфликтов.
+        </p>
+        <ul>
+          <li>Еженедельные обзоры</li>
+          <li>Согласование условий</li>
+          <li>История договорённостей</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section callout">
+    <div>
+      <h2>Соберите культуру доведения дел до конца</h2>
+      <p>
+        MaybeTask помогает договориться заранее и сфокусироваться на результате. Меньше
+        напоминаний — больше ответственности.
+      </p>
+    </div>
+    <button class="primary">Начать пилот</button>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <strong>MaybeTask</strong>
+      <p>Планировщик, который превращает задачи в честные договорённости.</p>
+    </div>
+    <div>
+      <p>Свяжитесь с нами: hello@maybetask.team</p>
+      <p>© 2024 MaybeTask</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
