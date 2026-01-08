@@ -93,7 +93,7 @@
         </label>
         <label>
           Исполнитель
-          <input type="text" name="owner" placeholder="Имя коллеги" required />
+          <select name="owner" id="ownerSelect" required></select>
         </label>
         <label>
           Срок выполнения
@@ -117,6 +117,14 @@
         <ul id="contractList" class="contract-list"></ul>
       </div>
     </div>
+  </section>
+
+  <section class="section" id="profiles">
+    <div class="section-head">
+      <h2>Личный кабинет участника</h2>
+      <p>У каждого есть своя роль: баланс, активные контракты и задачи, поставленные коллегам.</p>
+    </div>
+    <div id="memberProfiles" class="grid three"></div>
   </section>
 
   <section class="section" id="rewards">
