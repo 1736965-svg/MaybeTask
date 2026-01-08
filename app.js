@@ -4,34 +4,71 @@ const balanceEl = document.getElementById("balance");
 const teamBalanceEl = document.getElementById("teamBalance");
 const metricContracts = document.getElementById("metricContracts");
 const metricBalance = document.getElementById("metricBalance");
+const metricCompletion = document.getElementById("metricCompletion");
 
-let teamBalance = 1200;
-let contracts = [
-  {
-    title: "Прототип онбординга",
-    owner: "Сергей",
-    due: "15 марта",
-    reward: 180,
-    xp: 25,
-    status: "В работе",
-  },
-  {
-    title: "План ретроспективы",
-    owner: "Инна",
-    due: "19 марта",
-    reward: 120,
-    xp: 15,
-    status: "Согласован",
-  },
-];
+const storageKey = "maybetask-data";
+const defaultState = {
+  teamBalance: 1200,
+  contracts: [
+    {
+      title: "Прототип онбординга",
+      owner: "Сергей",
+      due: "15 марта",
+      reward: 180,
+      xp: 25,
+      status: "В работе",
+    },
+    {
+      title: "План ретроспективы",
+      owner: "Инна",
+      due: "19 марта",
+      reward: 120,
+      xp: 15,
+      status: "Согласован",
+    },
+  ],
+};
+
+const loadState = () => {
+  const saved = localStorage.getItem(storageKey);
+  if (!saved) {
+    return { ...defaultState };
+  }
+
+  try {
+    const parsed = JSON.parse(saved);
+    return {
+      teamBalance: Number(parsed.teamBalance) || defaultState.teamBalance,
+      contracts: Array.isArray(parsed.contracts) ? parsed.contracts : defaultState.contracts,
+    };
+  } catch (error) {
+    return { ...defaultState };
+  }
+};
+
+const saveState = () => {
+  localStorage.setItem(storageKey, JSON.stringify({ teamBalance, contracts }));
+};
+
+let { teamBalance, contracts } = loadState();
 
 const formatNumber = (value) => value.toLocaleString("ru-RU");
+
+const updateMetrics = () => {
+  const completedCount = contracts.filter(
+    (contract) => contract.status === "Выполнено вовремя",
+  ).length;
+  const total = contracts.length || 1;
+  const completionRate = Math.round((completedCount / total) * 100);
+  metricCompletion.textContent = `${completionRate}%`;
+};
 
 const renderBalance = () => {
   balanceEl.textContent = formatNumber(teamBalance);
   teamBalanceEl.textContent = formatNumber(teamBalance + 1150);
   metricBalance.textContent = formatNumber(teamBalance + 780);
   metricContracts.textContent = `${contracts.length + 10}`;
+  updateMetrics();
 };
 
 const renderContracts = () => {
@@ -87,6 +124,7 @@ const addContract = (formData) => {
   ];
 
   teamBalance += reward;
+  saveState();
   renderContracts();
   renderBalance();
 };
@@ -105,6 +143,7 @@ const updateContractStatus = (index, action) => {
     return { ...contract, status: "Пересогласование" };
   });
 
+  saveState();
   renderContracts();
   renderBalance();
 };
